@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginStrategyFactory } from './strategies/login-strategy.factory';
+import { LoginDto } from './dto/login-dto';
 
 @Injectable()
 export class AuthService {
   constructor(private readonly loginStrategyFactory: LoginStrategyFactory) {}
 
-  login(strategyName: string, createAuthDto: CreateAuthDto): string {
+  login(strategyName: string, loginDto: LoginDto): Promise<string> {
     const strategy = this.loginStrategyFactory.create(strategyName);
-    return strategy.login(createAuthDto);
+    return strategy.login(loginDto);
   }
 }
