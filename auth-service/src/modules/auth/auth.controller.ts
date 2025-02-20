@@ -4,7 +4,7 @@ import { AuthService } from './service/auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from 'src/common/guards/auth.guard';
 import { Request } from 'express';
 import { User } from '../user/entities/user.entity';
 @Controller('auth')
