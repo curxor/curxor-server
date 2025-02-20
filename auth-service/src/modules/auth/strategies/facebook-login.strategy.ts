@@ -1,4 +1,4 @@
-import { LoginDto } from '../dto/login-dto';
+import { LoginDto } from '../dto/login.dto';
 import { LoginStrategy } from './login-strategy.interface';
 
 export class FacebookLoginStrategy implements LoginStrategy {

@@ -1,11 +1,7 @@
-import { LoginDto } from '../dto/login-dto';
+import { LoginDto } from '../dto/login.dto';
 import { LoginStrategy } from './login-strategy.interface';
 import { OAuth2Client } from 'google-auth-library';
-const GoogleConfig = {
-  clientId: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  redirectUri: process.env.GOOGLE_CALLBACK_URL,
-};
+import { GoogleConfig } from 'src/config/google.config';
 export class GoogleLoginStrategy implements LoginStrategy {
   private oauth2Client: OAuth2Client;
   constructor() {

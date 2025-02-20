@@ -1,20 +1,56 @@
-import { Controller } from '@nestjs/common';
-import { GrpcMethod } from '@nestjs/microservices';
-import { AuthService } from './auth.service';
-import { LoginDto } from './dto/login-dto';
-@Controller()
+import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+// import { GrpcMethod } from '@nestjs/microservices';
+import { AuthService } from './service/auth.service';
+import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
+import { VerifyOtpDto } from './dto/verify-otp.dto';
+import { AuthGuard } from './auth.guard';
+import { Request } from 'express';
+import { User } from '../user/entities/user.entity';
+@Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @GrpcMethod('AuthService', 'LoginUser')
-  loginUser(data: { type: string } & LoginDto) {
-    const token = this.authService.login(data.type, data);
+  @Post('login')
+  loginUser(@Body() loginDto: LoginDto) {
+    const token = this.authService.login(loginDto);
     return {
       token: token,
       message: 'User logged in successfully',
       status: 200,
     };
   }
+  @Post()
+  @UseGuards(AuthGuard)
+  auth(@Req() req: Request) {
+    return req['user'] as User;
+  }
+  @Post('register')
+  async registerUser(@Body() registerDto: RegisterDto) {
+    await this.authService.register(registerDto);
+    return {
+      message: 'OK',
+      status: 200,
+    };
+  }
+  @Post('verify')
+  async verifyUser(@Body() verify: VerifyOtpDto) {
+    const token = await this.authService.verify(verify);
+    return {
+      token: token,
+      message: 'OK',
+      status: 200,
+    };
+  }
+  // @Post('customer')
+  // auth(data: { type: string } & LoginDto) {
+  //   const token = this.authService.login(data.type, data);
+  //   return {
+  //     token: token,
+  //     message: 'User logged in successfully',
+  //     status: 200,
+  //   };
+  // }
   // @GrpcMethod('AuthService', 'Auth')
   // authUser(data: { email: string; password: string; type: string }) {
   //   const value = this.authService.login(data.type, data);
