@@ -9,6 +9,8 @@ message LoginUserRequest {
   string email = 1;
   string password = 2;
   string type = 3;
+  string code = 4;
+
 }
 
 message LoginUserResponse {

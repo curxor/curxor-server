@@ -13,10 +13,6 @@ export class LoginStrategyFactory {
         return new GoogleLoginStrategy();
       case 'facebook':
         return new FacebookLoginStrategy();
-      case 'admin':
-        return new FacebookLoginStrategy();
-      case 'shop':
-        return new FacebookLoginStrategy();
       default:
         throw new Error(`Login strategy ${strategyName} not supported`);
     }

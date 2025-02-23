@@ -1,7 +1,7 @@
 import { LoginDto } from '../dto/login.dto';
 import { LoginStrategy } from './login-strategy.interface';
 import { OAuth2Client } from 'google-auth-library';
-import { GoogleConfig } from 'src/config/google.config';
+import { GoogleConfig } from 'src/configs/google.config';
 export class GoogleLoginStrategy implements LoginStrategy {
   private oauth2Client: OAuth2Client;
   constructor() {

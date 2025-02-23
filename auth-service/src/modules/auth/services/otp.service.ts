@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { generateOtp } from 'src/utils/generate-otp.util';
 import { comparePassword, hashPassword } from 'src/utils/hash.util';
 import { VerifyOtpDto } from '../dto/verify-otp.dto';
-import { RedisService } from 'src/modules/database/redis.service';
+import { RedisService } from 'src/database/redis.service';
 @Injectable()
 export class OtpService {
   constructor(private readonly redisService: RedisService) {}
