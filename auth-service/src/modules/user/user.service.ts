@@ -20,11 +20,9 @@ export class UserService {
     return this.userRepository.save(createUser);
   }
   async findUserById(id: number, msg: string): Promise<User> {
-    console.log(id);
     const user = await this.userRepository.findOne({
       where: { id: id, active: true },
     });
-    console.log(user);
     if (!user) {
       throw new BadRequestException(msg);
     }

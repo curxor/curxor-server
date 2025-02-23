@@ -32,4 +32,5 @@ export class User {
   createdAt: Date;
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
+    profile: any;
 }

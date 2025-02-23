@@ -1,12 +1,13 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Req } from '@nestjs/common';
 // import { GrpcMethod } from '@nestjs/microservices';
-import { AuthService } from './service/auth.service';
+import { AuthService } from './services/auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+// import { AuthGuard } from 'src/common/guards/auth.guard';
 import { Request } from 'express';
 import { User } from '../user/entities/user.entity';
+import { Roles } from 'src/common/decorators/role.decorator';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -21,7 +22,8 @@ export class AuthController {
     };
   }
   @Post()
-  @UseGuards(AuthGuard)
+  @Roles('admin', 'user')
+  // @UseGuards(AuthGuard)
   auth(@Req() req: Request) {
     return req['user'] as User;
   }

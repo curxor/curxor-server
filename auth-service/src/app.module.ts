@@ -5,9 +5,10 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/user/user.module';
 import { EmailModule } from './modules/email/email.module';
-import { DatabaseModule } from './modules/database/mysql.module';
-import { RedisModule } from './modules/database/redis.module';
+import { DatabaseModule } from './database/mysql.module';
+import { RedisModule } from './database/redis.module';
 import { AddressModule } from './modules/address/address.module';
+import { RoleModule } from './modules/role/role.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,6 +21,7 @@ import { AddressModule } from './modules/address/address.module';
     EmailModule,
     DatabaseModule,
     AddressModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
