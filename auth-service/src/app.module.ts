@@ -9,6 +9,7 @@ import { DatabaseModule } from './database/mysql.module';
 import { RedisModule } from './database/redis.module';
 import { AddressModule } from './modules/address/address.module';
 import { RoleModule } from './modules/role/role.module';
+import { ShopModule } from './modules/shop/shop.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,6 +23,7 @@ import { RoleModule } from './modules/role/role.module';
     DatabaseModule,
     AddressModule,
     RoleModule,
+    ShopModule,
   ],
   controllers: [AppController],
   providers: [AppService],

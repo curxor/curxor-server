@@ -1,9 +1,11 @@
+import { Shop } from 'src/modules/shop/entities/shop.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToOne,
 } from 'typeorm';
 
 @Entity('User')
@@ -28,9 +30,10 @@ export class User {
   dob: Date;
   @Column({ default: true })
   active: boolean;
+  @OneToOne(() => Shop, (shop) => shop.user)
+  shop: Shop;
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
-    profile: any;
 }
