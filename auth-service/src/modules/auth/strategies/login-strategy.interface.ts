@@ -1,4 +1,4 @@
 import { LoginDto } from '../dto/login.dto';
-export interface LoginStrategy {
+export interface ILoginStrategy {
   login(loginDto: LoginDto): Promise<string>;
 }
