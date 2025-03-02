@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { LoginStrategyFactory } from '../strategies/login-strategy.factory';
+import { LoginStrategy } from '../strategies/login-strategy.factory';
 import { LoginDto } from '../dto/login.dto';
 import { RegisterDto } from '../dto/register.dto';
 import { UserService } from '../../user/user.service';
@@ -12,14 +12,14 @@ import { TokenDto } from '../dto/token.dto';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly loginStrategyFactory: LoginStrategyFactory,
+    private readonly loginStrategyFactory: LoginStrategy,
     private readonly userService: UserService,
     private readonly otpService: OtpService,
     private readonly emailService: EmailService,
     private readonly tokenService: TokenService,
   ) {}
   login(loginDto: LoginDto): Promise<string> {
-    const strategy = this.loginStrategyFactory.create(loginDto.type);
+    const strategy = this.loginStrategyFactory.getStrategy(loginDto.type);
     return strategy.login(loginDto);
   }
   async register(register: RegisterDto): Promise<void> {
